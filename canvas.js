@@ -1,4 +1,5 @@
 let welcomeCanvas;
+let timer;
 function WelcomeCanvas() {
     function canv_mousemove(e) {
         mx = e.clientX - canv.offsetLeft - canv.offsetParent.offsetLeft, my = $(window).scrollTop() + e.clientY - canv.offsetTop - canv.offsetParent.offsetTop
@@ -63,7 +64,7 @@ function WelcomeCanvas() {
                 pixels.splice(index, pixels.length - index), callback && callback()
             }
         }
-        welcomeCanvas && welcomeCanvas.loaded && $(".js-welcomeCanvas").hide(), imageData = ctx.createImageData(cw, ch), imageDataCopy = ctx.createImageData(cw, ch).data, $(topLogo.image).fadeOut(), delay ? setTimeout(function() {
+        welcomeCanvas && welcomeCanvas.loaded && window.innerWidth > 1217 && $(".js-welcomeCanvas").hide(), imageData = ctx.createImageData(cw, ch), imageDataCopy = ctx.createImageData(cw, ch).data, $(topLogo.image).fadeOut(), delay ? setTimeout(function() {
             initialize()
         }, delay) : initialize()
     }
@@ -122,9 +123,13 @@ function WelcomeCanvas() {
     }, $(".js-welcomeCanvas").on("mousemove.animLogo", canv_mousemove).on("mouseout", function() {
         mx = my = -1
     }), $(window).resize(function() {
-        destroy(), bodyResize(), init(0, function() {
-            showLogo()
-        })
+            if(window.innerWidth <= 1217) {
+                destroy()
+                stop()
+                let img = $(".animationStub")[0]
+                img.style.display = "block"
+            } 
+        
     }), {
         init: function() {
             var _this = this;
@@ -151,6 +156,8 @@ function WelcomeCanvas() {
 }
 
 window.addEventListener('load', () => {
-    welcomeCanvas = new WelcomeCanvas();
-    welcomeCanvas.init(1e3);
+    if(window.innerWidth > 1217) {
+        welcomeCanvas = new WelcomeCanvas();
+        welcomeCanvas.init(1e3);
+    }
 })

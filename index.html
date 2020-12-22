@@ -6,9 +6,28 @@
   <title>Document</title>
 </head>
 <body style="background: blue;">
-  <img class="animationStub" src="logo-vertical-white.png" alt="Rubika" style="display: none;" crossorigin="anonymous">
+  <div style="position: relative;
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 0 15px;
+  height: 800px;
+  display: flex;
+  align-items: center;">
+  <style >
+    img {
+      display: none; 
+      max-width: 100%;
+    }
+    @media (max-width: 1217px) {
+    
+    img {
+      display: block;
+    }
+    }
+  </style>
+  <img class="animationStub" src="logo-vertical-white.png" alt="Rubika" crossorigin="anonymous">
   <canvas id="canv" class="b-welcome__canvas js-welcomeCanvas" width="1200" height="800" style="" crossorigin="anonymous"></canvas>
-
+</div>
 
   <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
